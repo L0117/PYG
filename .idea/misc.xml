@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/pyg_manager_web" />
+    <file type="web" url="file://$PROJECT_DIR$/pyg_sellergoods_service" />
+    <file type="web" url="file://$PROJECT_DIR$/pyg_shop_web" />
+  </component>
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pyg_parent/pom.xml" />
+        <option value="$PROJECT_DIR$/pyg_common/pom.xml" />
+        <option value="$PROJECT_DIR$/pyg_pojo/pom.xml" />
+        <option value="$PROJECT_DIR$/pyg_dao/pom.xml" />
+        <option value="$PROJECT_DIR$/pyg_sellergoods_interface/pom.xml" />
+        <option value="$PROJECT_DIR$/pyg_sellergoods_service/pom.xml" />
+        <option value="$PROJECT_DIR$/pyg_manager_web/pom.xml" />
+        <option value="$PROJECT_DIR$/pyg_shop_web/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_10" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+</project>

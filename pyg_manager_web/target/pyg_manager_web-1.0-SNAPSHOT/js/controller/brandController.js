@@ -1,0 +1,90 @@
+//品牌控制层
+app.controller('brandController' ,function($scope,$controller,brandService){
+    $controller('baseController',{$scope:$scope});//继承
+    //获取品牌列表
+    $scope.findAll=function(){
+        //http://localhost:9101/admin/brand.html
+        brandService.findAll().success(
+            function(response){
+                $scope.list=response;
+            }
+        );
+    }
+
+    //刷新页面
+    $scope.reloadList=function(){
+        $scope.search($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
+    }
+    //分页查询
+    $scope.findPage=function(page,rows){
+        brandService.findPage(page,rows).success(
+            function(response){
+                $scope.list=response.rows;
+                $scope.paginationConf.totalItems=response.total;
+            }
+        );
+    }
+    $scope.searchEntity={};
+    //分页条件查询
+    $scope.search=function(page,rows){
+        brandService.search(page,rows,$scope.searchEntity).success(
+            function(response){
+                $scope.list=response.rows;
+                $scope.paginationConf.totalItems=response.total;
+            }
+        );
+    }
+    $scope.entity={};//前端定义的品牌json对象
+    //添加和修改共用的保存方法
+    $scope.save=function(){
+        //修改和添加的区别，entity 如果新增是没有id 修改是有的
+        var methodObject;
+        if($scope.entity.id!=null){//修改
+            methodObject=brandService.update($scope.entity);
+        }else{
+            methodObject=brandService.add($scope.entity);
+        }
+        methodObject.success(
+            function(response){
+                if(response.success){
+                    $scope.reloadList();//刷新页面
+                }else{
+                    alert(response.message);
+                }
+            }
+        );
+    }
+    //修改数据回显
+    $scope.findOne=function(id){
+        brandService.findOne(id).success(
+            function(response){
+                $scope.entity=response;
+            }
+        );
+    }
+    $scope.selectIds=[];
+    $scope.updateSelection=function($event,id){
+        //$event 源 代表事件
+        if($event.target.checked){
+            $scope.selectIds.push(id);
+        }else{
+            //1下标 2移除的个数
+            var index=$scope.selectIds.indexOf(id);
+            $scope.selectIds.splice(index,1);
+        }
+    }
+    //批量删除
+    $scope.dele=function(){
+        brandService.dele($scope.selectIds).success(
+            function(response){
+                if(response.success){
+                    //刷新页面
+                    $scope.reloadList();
+                    $scope.selectIds=[];
+                }else{
+                    alert(response.message);
+                }
+            }
+        );
+    }
+});
